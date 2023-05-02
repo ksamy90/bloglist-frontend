@@ -20,8 +20,6 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
     removeBlog(blog.id);
   };
 
-  const button1 = <button onClick={changeBlog}>like</button>;
-  const button2 = <button onClick={deleteBlog}>remove</button>;
   return (
     <div style={blogStyle}>
       {blog.title} {blog.author}
@@ -31,8 +29,8 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
       <div>{toggle ? `${blog.url}` : ""}</div>
       <div>
         {toggle && `${blog.likes}`}
-        {toggle && button1}
-        {toggle && button2}
+        {toggle && <button onClick={changeBlog}>like</button>}
+        {toggle && <button onClick={deleteBlog}>remove</button>}
       </div>
       <div>{toggle ? `${blog.author}` : ""}</div>
     </div>

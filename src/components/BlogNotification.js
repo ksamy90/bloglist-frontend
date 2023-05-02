@@ -1,4 +1,4 @@
-const BloNotification = ({ message }) => {
+const BlogNotification = ({ message }) => {
   if (message === null) {
     return null;
   }
@@ -7,4 +7,4 @@ const BloNotification = ({ message }) => {
   }
 };
 
-export default BloNotification;
+export default BlogNotification;

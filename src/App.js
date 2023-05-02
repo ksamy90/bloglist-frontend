@@ -20,7 +20,7 @@ const App = () => {
 
   useEffect(() => {
     blogService.getAll().then((blogs) => setBlogs(blogs));
-  }, []);
+  }, [blogs]);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem("loggedBlogUser");
@@ -33,6 +33,7 @@ const App = () => {
 
   const logoutUser = () => {
     window.localStorage.removeItem("loggedBlogUser");
+    setUser(null);
   };
 
   const handleLogin = async (event) => {
@@ -72,7 +73,6 @@ const App = () => {
       return blog;
     });
     setBlogs(updatedBlogs);
-    console.log(updatedBlogs);
   };
   const deleteBlog = (blogId) => {
     const filterBlog = blogs.map((blog) => {
