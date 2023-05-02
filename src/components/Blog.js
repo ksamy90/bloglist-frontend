@@ -1,5 +1,5 @@
 import { useState } from "react";
-const Blog = ({ blog, updateBlog }) => {
+const Blog = ({ blog, updateBlog, removeBlog }) => {
   const [toggle, setToggle] = useState(false);
   const blogStyle = {
     paddingTop: 10,
@@ -16,7 +16,12 @@ const Blog = ({ blog, updateBlog }) => {
   const changeBlog = () => {
     updateBlog(blog.id, updatedBlog);
   };
-  const button = <button onClick={changeBlog}>like</button>;
+  const deleteBlog = () => {
+    removeBlog(blog.id);
+  };
+
+  const button1 = <button onClick={changeBlog}>like</button>;
+  const button2 = <button onClick={deleteBlog}>remove</button>;
   return (
     <div style={blogStyle}>
       {blog.title} {blog.author}
@@ -26,7 +31,8 @@ const Blog = ({ blog, updateBlog }) => {
       <div>{toggle ? `${blog.url}` : ""}</div>
       <div>
         {toggle && `${blog.likes}`}
-        {toggle && button}
+        {toggle && button1}
+        {toggle && button2}
       </div>
       <div>{toggle ? `${blog.author}` : ""}</div>
     </div>

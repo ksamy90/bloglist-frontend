@@ -74,6 +74,21 @@ const App = () => {
     setBlogs(updatedBlogs);
     console.log(updatedBlogs);
   };
+  const deleteBlog = (blogId) => {
+    const filterBlog = blogs.map((blog) => {
+      if (blog.id === blogId) {
+        window.confirm(`${blog.title} succesfully removed`);
+        blogService.deleteBlog(blogId).then(() => {
+          return blog;
+        });
+      } else {
+        window.confirm("bad request, no permission to delete");
+      }
+      return blog;
+    });
+    // console.log(filterBlog);
+    setBlogs(filterBlog);
+  };
 
   return (
     <div>
@@ -100,7 +115,14 @@ const App = () => {
           {blogs
             .sort((a, b) => b.likes - a.likes)
             .map((blog) => {
-              return <Blog key={blog.id} blog={blog} updateBlog={updateLike} />;
+              return (
+                <Blog
+                  key={blog.id}
+                  blog={blog}
+                  updateBlog={updateLike}
+                  removeBlog={deleteBlog}
+                />
+              );
             })}
         </div>
       )}
