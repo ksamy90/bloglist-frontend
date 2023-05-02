@@ -76,17 +76,16 @@ const App = () => {
   };
   const deleteBlog = (blogId) => {
     const filterBlog = blogs.map((blog) => {
-      if (blog.id === blogId) {
+      if (blog.id === blogId && blog.author === user.username) {
         window.confirm(`${blog.title} succesfully removed`);
         blogService.deleteBlog(blogId).then(() => {
           return blog;
         });
-      } else {
-        window.confirm("bad request, no permission to delete");
+      } else if (blog.id === blogId && blog.author !== user.username) {
+        window.confirm("no permissions");
       }
       return blog;
     });
-    // console.log(filterBlog);
     setBlogs(filterBlog);
   };
 
