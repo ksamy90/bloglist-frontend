@@ -5,7 +5,7 @@ import loginService from "./services/login";
 import LoginForm from "./components/Forms/LoginForm";
 import Notification from "./components/Notification";
 import BlogForm from "./components/Forms/BlogForm";
-import BloNotification from "./components/BlogNotification";
+import BlogNotification from "./components/BlogNotification";
 import Togglable from "./components/Forms/Togglable";
 
 const App = () => {
@@ -62,11 +62,24 @@ const App = () => {
     }, 5000);
   };
 
+  const updateLike = (blogId, updatedBlog) => {
+    const updatedBlogs = blogs.map((blog) => {
+      if (blog.id === blogId) {
+        blogService.update(blog.id, updatedBlog).then((returnedBlog) => {
+          return returnedBlog;
+        });
+      }
+      return blog;
+    });
+    setBlogs(updatedBlogs);
+    console.log(updatedBlogs);
+  };
+
   return (
     <div>
       <h2>blogs</h2>
       <Notification errorMessage={errorMessage} />
-      <BloNotification message={message} />
+      <BlogNotification message={message} />
       {user === null && (
         <LoginForm
           username={username}
@@ -85,7 +98,7 @@ const App = () => {
             <BlogForm createBlog={addBlog} />
           </Togglable>
           {blogs.map((blog) => (
-            <Blog key={blog.id} blog={blog} />
+            <Blog key={blog.id} blog={blog} updateBlog={updateLike} />
           ))}
         </div>
       )}

@@ -1,7 +1,36 @@
-const Blog = ({blog}) => (
-  <div>
-    {blog.title} {blog.author}
-  </div>  
-)
+import { useState } from "react";
+const Blog = ({ blog, updateBlog }) => {
+  const [toggle, setToggle] = useState(false);
+  const blogStyle = {
+    paddingTop: 10,
+    paddingLeft: 2,
+    border: "solid",
+    borderWidth: 1,
+    marginBottom: 5,
+  };
 
-export default Blog
+  const updatedBlog = {
+    ...blog,
+    likes: blog.likes + 1,
+  };
+  const changeBlog = () => {
+    updateBlog(blog.id, updatedBlog);
+  };
+  const button = <button onClick={changeBlog}>like</button>;
+  return (
+    <div style={blogStyle}>
+      {blog.title} {blog.author}
+      <button onClick={() => setToggle(!toggle)}>
+        {toggle ? "hide" : "view"}
+      </button>
+      <div>{toggle ? `${blog.url}` : ""}</div>
+      <div>
+        {toggle && `${blog.likes}`}
+        {toggle && button}
+      </div>
+      <div>{toggle ? `${blog.author}` : ""}</div>
+    </div>
+  );
+};
+
+export default Blog;
