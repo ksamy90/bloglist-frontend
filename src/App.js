@@ -89,6 +89,9 @@ const App = () => {
     setBlogs(filterBlog);
   };
 
+  const handleUsernameChange = ({ target }) => setUsername(target.value);
+  const handlePasswordChange = ({ target }) => setPassword(target.value);
+
   return (
     <div>
       <h2>blogs</h2>
@@ -98,8 +101,8 @@ const App = () => {
         <LoginForm
           username={username}
           password={password}
-          setUsername={setUsername}
-          setPassword={setPassword}
+          handleUsernameChange={handleUsernameChange}
+          handlePasswordChange={handlePasswordChange}
           handleLogin={handleLogin}
         />
       )}
