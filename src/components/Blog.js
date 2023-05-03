@@ -23,13 +23,17 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
   return (
     <div style={blogStyle}>
       {blog.title} {blog.author}
-      <button onClick={() => setToggle(!toggle)}>
+      <button className="togglebtn" onClick={() => setToggle(!toggle)}>
         {toggle ? "hide" : "view"}
       </button>
       <div>{toggle ? `${blog.url}` : ""}</div>
       <div>
         {toggle && `${blog.likes}`}
-        {toggle && <button onClick={changeBlog}>like</button>}
+        {toggle && (
+          <button className="editblog" onClick={changeBlog}>
+            like
+          </button>
+        )}
         {toggle && <button onClick={deleteBlog}>remove</button>}
       </div>
       <div>{toggle ? `${blog.author}` : ""}</div>

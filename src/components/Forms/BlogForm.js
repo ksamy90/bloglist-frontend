@@ -19,8 +19,18 @@ const BlogForm = ({ createBlog }) => {
   const handleUrlChange = (e) => setNewUrl(e.target.value);
   return (
     <form onSubmit={addBlog}>
-      title:- <input value={newBlog} onChange={handleBlogChange} />
-      url:- <input value={newUrl} onChange={handleUrlChange} />
+      title:-{" "}
+      <input
+        value={newBlog}
+        onChange={handleBlogChange}
+        placeholder="input-title"
+      />
+      url:-{" "}
+      <input
+        value={newUrl}
+        onChange={handleUrlChange}
+        placeholder="input-url"
+      />
       <button type="submit">save</button>
     </form>
   );
