@@ -32,7 +32,7 @@ test("renders blog url/likes", async () => {
   expect(element2).toBeDefined();
 });
 
-xtest("clicking the like button calls the event handler", async () => {
+test("clicking the like button calls the event handler", async () => {
   const blog = {
     title: "advanced react parts",
     author: "lydia hallie",
@@ -43,9 +43,11 @@ xtest("clicking the like button calls the event handler", async () => {
 
   const { container } = render(<Blog blog={blog} updateBlog={mockHandler} />);
   const user = userEvent.setup();
-  const button = container.querySelector(".editblog");
-  await user.click(button);
-  await user.click(button);
+  const button1 = container.querySelector(".togglebtn");
+  await user.click(button1);
+  const button2 = container.querySelector(".editblog");
+  await user.click(button2);
+  await user.click(button2);
 
   expect(mockHandler.mock.calls).toHaveLength(2);
 });

@@ -19,6 +19,6 @@ test("<BlogForm /> updates state and calls submit", async () => {
   await user.click(sendButton);
 
   expect(createBlog.mock.calls).toHaveLength(1);
-  expect(createBlog.mock.calls[0][0].content).toEqual("awesome vue");
-  expect(createBlog.mock.calls[1][0].content).toBe("http://vue.io");
+  expect(createBlog.mock.calls[0][0].title).toBe("awesome vue");
+  expect(createBlog.mock.calls[0][0].url).toBe("http://vue.io");
 });
