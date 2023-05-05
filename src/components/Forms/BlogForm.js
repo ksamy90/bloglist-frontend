@@ -21,12 +21,14 @@ const BlogForm = ({ createBlog }) => {
     <form onSubmit={addBlog}>
       title:-{" "}
       <input
+        id="input-title"
         value={newBlog}
         onChange={handleBlogChange}
         placeholder="input-title"
       />
       url:-{" "}
       <input
+        id="input-url"
         value={newUrl}
         onChange={handleUrlChange}
         placeholder="input-url"

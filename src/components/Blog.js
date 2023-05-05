@@ -27,7 +27,7 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
         {toggle ? "hide" : "view"}
       </button>
       <div>{toggle ? `${blog.url}` : ""}</div>
-      <div>
+      <div className="blog">
         {toggle && `${blog.likes}`}
         {toggle && (
           <button className="editblog" onClick={changeBlog}>
