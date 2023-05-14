@@ -7,8 +7,7 @@ import Notification from "./components/Notification";
 import BlogForm from "./components/Forms/BlogForm";
 import BlogNotification from "./components/BlogNotification";
 import Togglable from "./components/Forms/Togglable";
-import { createNotify } from "./reducers/notifyReducer";
-import { showError } from "./reducers/errorReducer";
+import { createNotify, showError } from "./reducers/notifyReducer";
 import { useDispatch, useSelector } from "react-redux";
 
 const App = () => {
@@ -104,8 +103,12 @@ const App = () => {
   return (
     <div>
       <h2>blogs</h2>
-      <Notification errorMessage={notifyData.errorNote} />
-      <BlogNotification message={notifyData.notification} />
+      {notifyData.notification === "wrong username or password" && (
+        <Notification errorMessage={notifyData.notification} />
+      )}
+      {notifyData.notification !== "wrong username or password" && (
+        <BlogNotification message={notifyData.notification} />
+      )}
       {user === null && (
         <LoginForm
           username={username}

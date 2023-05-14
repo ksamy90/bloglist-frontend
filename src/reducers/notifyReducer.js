@@ -9,9 +9,12 @@ const notifySlice = createSlice({
     createNotify(_state, action) {
       return action.payload;
     },
+    showError(_state, action) {
+      return action.payload;
+    },
   },
 });
 
-export const { createNotify } = notifySlice.actions;
+export const { createNotify, showError } = notifySlice.actions;
 
 export default notifySlice.reducer;
