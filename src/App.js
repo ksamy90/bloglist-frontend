@@ -7,14 +7,19 @@ import Notification from "./components/Notification";
 import BlogForm from "./components/Forms/BlogForm";
 import BlogNotification from "./components/BlogNotification";
 import Togglable from "./components/Forms/Togglable";
+import { createNotify } from "./reducers/notifyReducer";
+import { showError } from "./reducers/errorReducer";
+import { useDispatch, useSelector } from "react-redux";
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [message, setMessage] = useState(null);
+  // const [errorMessage, setErrorMessage] = useState(null);
+  // const [message, setMessage] = useState(null);
+  const dispatch = useDispatch();
+  const notifyData = useSelector((notification) => notification);
 
   const blogFormRef = useRef();
 
@@ -46,20 +51,24 @@ const App = () => {
       setUsername("");
       setPassword("");
     } catch (exception) {
-      setErrorMessage("wrong username or password");
+      // setErrorMessage("wrong username or password");
+      dispatch(showError("wrong username or password"));
       setTimeout(() => {
-        setErrorMessage(null);
+        // setErrorMessage(null);
+        dispatch(showError(""));
       }, 5000);
     }
   };
   const addBlog = (blogObject) => {
     blogFormRef.current.toggleVisibility();
-    setMessage(`${blogObject.title} succesfully created`);
+    // setMessage(`${blogObject.title} succesfully created`);
+    dispatch(createNotify(`${blogObject.title} succesfully created`));
     blogService.create(blogObject).then((returnedBlog) => {
       setBlogs(blogs.concat(returnedBlog));
     });
     setTimeout(() => {
-      setMessage(null);
+      // setMessage(null);
+      dispatch(createNotify(""));
     }, 5000);
   };
 
@@ -95,8 +104,8 @@ const App = () => {
   return (
     <div>
       <h2>blogs</h2>
-      <Notification errorMessage={errorMessage} />
-      <BlogNotification message={message} />
+      <Notification errorMessage={notifyData.errorNote} />
+      <BlogNotification message={notifyData.notification} />
       {user === null && (
         <LoginForm
           username={username}
